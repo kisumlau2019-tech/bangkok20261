@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>曼谷親子之旅 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAF8F0;--ink:#1A1710;--muted:#7A7568;
+  --accent:#C0742A;--accent-light:#F5EBD8;
+  --blue:#1A6B8A;--blue-light:#DFF0F7;
+  --green:#3A7A52;--green-light:#E0F2E8;
+  --amber:#B07820;--amber-light:#FBF3E0;
+  --red:#A02828;--red-light:#FAE8E8;
+  --purple:#5A3A8A;--purple-light:#EDE8F7;
+  --teal:#1A8A7A;--teal-light:#DFFAF5;
+  --pink:#8A1A6A;--pink-light:#F7DFEF;
+  --border:rgba(26,23,16,0.1);--card:#FFFFFF;--radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
+
+.hero{background:var(--ink);color:var(--cream);padding:44px 20px 36px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 60%,rgba(192,116,42,0.3) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(26,107,138,0.2) 0%,transparent 50%)}
+.hero-inner{position:relative}
+.hero-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;font-weight:500}
+.hero h1{font-family:'Noto Serif TC',serif;font-size:clamp(26px,6vw,40px);font-weight:600;margin-bottom:8px;line-height:1.2}
+.hero-sub{font-size:13px;color:rgba(250,248,240,0.6);margin-bottom:22px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+.hero-pill{background:rgba(250,248,240,0.1);border:1px solid rgba(250,248,240,0.15);border-radius:20px;padding:4px 13px;font-size:12px;color:rgba(250,248,240,0.8)}
+
+.nav-wrap{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:600px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;padding:12px 10px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all 0.2s;min-width:60px}
+.nav-btn .ni{font-size:15px}
+.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
+
+.main{max-width:600px;margin:0 auto;padding:18px 14px 60px}
+
+.day-tabs{display:flex;gap:7px;overflow-x:auto;padding:2px 0 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.day-tabs::-webkit-scrollbar{display:none}
+.day-btn{flex-shrink:0;padding:7px 15px;border-radius:24px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;background:var(--card);color:var(--muted);transition:all 0.2s;white-space:nowrap;line-height:1.3;text-align:center}
+.day-btn.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+.card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;margin-bottom:12px}
+.card-header{padding:16px 16px 12px;border-bottom:1px solid var(--border)}
+.card-title{font-family:'Noto Serif TC',serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.card-sub{font-size:12px;color:var(--muted)}
+.prog-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+.prog-bar{flex:1;height:4px;background:var(--cream);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:var(--green);border-radius:2px;transition:width 0.4s}
+.prog-text{font-size:11px;color:var(--muted);white-space:nowrap}
+
+.item{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;border-bottom:1px solid var(--border)}
+.item:last-child{border-bottom:none}
+.item.done{opacity:0.6}
+.ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;margin-top:2px}
+.ico-place{background:var(--blue-light)}
+.ico-food{background:var(--amber-light)}
+.ico-transport{background:var(--green-light)}
+.ico-shop{background:var(--pink-light)}
+.ico-hotel{background:var(--purple-light)}
+.ico-water{background:var(--teal-light)}
+.ibody{flex:1;min-width:0}
+.itime{font-size:11px;color:var(--muted);margin-bottom:2px}
+.iname{font-size:14px;font-weight:500;color:var(--ink);line-height:1.4}
+.item.done .iname{text-decoration:line-through;color:var(--muted)}
+.idesc{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.5}
+.irow{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;align-items:center}
+.tag{font-size:10px;padding:3px 9px;border-radius:10px;font-weight:500;white-space:nowrap}
+.t-blue{background:var(--blue-light);color:var(--blue)}
+.t-amber{background:var(--amber-light);color:var(--amber)}
+.t-green{background:var(--green-light);color:var(--green)}
+.t-red{background:var(--red-light);color:var(--red)}
+.t-purple{background:var(--purple-light);color:var(--purple)}
+.t-teal{background:var(--teal-light);color:var(--teal)}
+.t-pink{background:var(--pink-light);color:var(--pink)}
+.map-link{display:inline-flex;align-items:center;gap:3px;font-size:10px;color:var(--blue);background:var(--blue-light);padding:3px 9px;border-radius:10px;text-decoration:none;font-weight:500}
+.warn{margin-top:8px;background:var(--amber-light);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:7px 10px;font-size:11px;color:var(--amber);line-height:1.5}
+.chk{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--border);background:transparent;cursor:pointer;flex-shrink:0;margin-top:4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;transition:all 0.2s}
+.chk.done{background:var(--green);border-color:var(--green);color:white}
+
+.sec-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:10px;padding-left:2px}
+.info-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}
+.info-name{font-family:'Noto Serif TC',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.info-dates{font-size:12px;color:var(--blue);font-weight:500;margin-bottom:6px}
+.info-detail{font-size:12px;color:var(--muted);line-height:2}
+.info-detail strong{color:var(--ink);font-weight:500}
+.info-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.info-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:7px 14px;border-radius:20px;text-decoration:none;font-weight:500;border:1.5px solid var(--border);color:var(--ink);background:var(--cream)}
+.note-card{background:var(--accent-light);border:1px solid rgba(192,116,42,0.15);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px}
+.note-title{font-size:13px;font-weight:500;color:var(--accent);margin-bottom:8px}
+.note-body{font-size:12px;color:var(--ink);line-height:2}
+.divider{height:1px;background:var(--border);margin:10px 0}
+
+.w-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:12px}
+.w-cell{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px 4px;text-align:center}
+.w-date{font-size:9px;color:var(--muted);margin-bottom:5px}
+.w-icon{font-size:20px;margin-bottom:3px}
+.w-loc{font-size:9px;color:var(--muted);margin-bottom:3px}
+.w-temp{font-size:12px;font-weight:500;color:var(--ink)}
+.w-rain{font-size:10px;color:var(--blue);margin-top:2px}
+.w-title{font-family:'Noto Serif TC',serif;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px}
+
+/* SPOTS */
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.f-btn{padding:5px 13px;border-radius:16px;border:1px solid var(--border);font-size:12px;cursor:pointer;background:var(--card);color:var(--muted);font-family:'DM Sans',sans-serif;transition:all 0.15s}
+.f-btn.on{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.spots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:9px}
+.spot-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:13px;cursor:pointer;transition:border-color 0.15s;user-select:none}
+.spot-card.picked{border:2px solid var(--green);background:var(--green-light)}
+.s-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.s-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:var(--cream)}
+.s-title{font-size:13px;font-weight:500;color:var(--ink);line-height:1.3;margin-bottom:2px}
+.s-sub{font-size:11px;color:var(--muted);line-height:1.4}
+.s-tip{font-size:11px;color:var(--green);margin-bottom:7px;line-height:1.4}
+.pick-mark{font-size:14px;color:var(--green);margin-left:auto;flex-shrink:0}
+.spots-summary{font-size:12px;color:var(--muted);margin-bottom:10px}
+.spots-summary span{font-weight:500;color:var(--ink)}
+
+.footer{text-align:center;padding:28px 16px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:16px}
+.footer a{color:var(--accent);text-decoration:none}
+
+@media(max-width:360px){.w-grid{grid-template-columns:repeat(3,1fr)}.spots-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">2026 夏日親子之旅</div>
+    <h1>曼谷・泰國<br>5日4夜</h1>
+    <div class="hero-sub">8月7日 — 8月11日</div>
+    <div class="hero-pills">
+      <span class="hero-pill">8大6小</span>
+      <span class="hero-pill">Safari World</span>
+      <span class="hero-pill">水上樂園</span>
+      <span class="hero-pill">KidZania</span>
+      <span class="hero-pill">鄭王廟</span>
+    </div>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="switchNav('itinerary',this)"><span class="ni">📅</span>行程</button>
+    <button class="nav-btn" onclick="switchNav('spots',this)"><span class="ni">🗺</span>景點</button>
+    <button class="nav-btn" onclick="switchNav('hotels',this)"><span class="ni">🏨</span>酒店</button>
+    <button class="nav-btn" onclick="switchNav('tips',this)"><span class="ni">💡</span>貼士</button>
+    <button class="nav-btn" onclick="switchNav('weather',this)"><span class="ni">🌤</span>天氣</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ITINERARY -->
+  <div id="view-itinerary">
+    <div class="day-tabs" id="dayTabs"></div>
+    <div id="dayContent"></div>
+  </div>
+
+  <!-- SPOTS -->
+  <div id="view-spots" style="display:none">
+    <div class="sec-label">景點選擇清單</div>
+    <div class="spots-summary">撳住意向景點 · 已揀 <span id="picked-count">0</span> 個</div>
+    <div class="filter-row" id="spotFilters"></div>
+    <div class="spots-grid" id="spotsGrid"></div>
+  </div>
+
+  <!-- HOTELS -->
+  <div id="view-hotels" style="display:none">
+    <div class="sec-label">住宿安排</div>
+    <div class="info-card">
+      <div class="info-name">The Cottage Suvarnabhumi Hotel</div>
+      <div class="info-dates">8月7日（深夜抵達）· 近素萬那普機場</div>
+      <div class="info-detail">距離素萬那普機場約5分鐘 · 深夜到達最方便</div>
+      <div class="info-links">
+        <a class="info-link" href="https://maps.google.com/?q=The+Cottage+Suvarnabhumi+Hotel+Bangkok" target="_blank">📍 Google Maps</a>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-name">Centre Point Sukhumvit 10 Hotel</div>
+      <div class="info-dates">8月8日 – 8月11日（3晚）· Sukhumvit</div>
+      <div class="info-detail">Sukhumvit 10 · 近 BTS Asok 站 · 購物交通方便</div>
+      <div class="info-links">
+        <a class="info-link" href="https://maps.google.com/?q=Centre+Point+Sukhumvit+10+Hotel+Bangkok" target="_blank">📍 Google Maps</a>
+      </div>
+    </div>
+    <div class="note-card">
+      <div class="note-title">住宿安排重點</div>
+      <div class="note-body">
+        ✅ D1（8/7）— 深夜到達近機場酒店，唔使長途車<br>
+        ✅ D2（8/8）— 轉入 Sukhumvit，之後4日交通方便<br>
+        🚇 Centre Point 步行至 BTS Asok 約5分鐘<br>
+        🛒 附近有 Terminal 21、Emquartier 購物
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div id="view-tips" style="display:none">
+    <div class="sec-label">實用貼士</div>
+    <div class="info-card">
+      <div class="info-name">交通</div>
+      <div class="divider"></div>
+      <div class="info-detail">
+        🚖 <strong>Grab App</strong> — 最方便，固定價錢唔需議價<br>
+        🚇 <strong>BTS Skytrain</strong> — Siam、Asok 一帶最好用<br>
+        🚢 <strong>昭披耶河快船</strong> — 去鄭王廟、大皇宮必坐<br>
+        🚕 <strong>Safari World / Siam Park</strong> — 較遠，建議Grab，約45–60分鐘
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-name">購票貼士</div>
+      <div class="divider"></div>
+      <div class="info-detail">
+        🎟 <strong>Safari World</strong> — Klook / Trip.com 網上買較便宜<br>
+        🎟 <strong>Siam Amazing Park</strong> — 包自助餐套票更抵<br>
+        🎟 <strong>KidZania</strong> — 平日票價較週末便宜<br>
+        🎟 <strong>Pororo Aquapark</strong> — 90cm以下小朋友免費<br>
+        ⚠️ <strong>Safari World 逢週一休息！</strong>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-name">寺廟著裝要求</div>
+      <div class="divider"></div>
+      <div class="info-detail">
+        👗 <strong>必須</strong>遮蓋肩膀同膝蓋先可以入場<br>
+        🩱 著短褲 / 背心會被拒入場<br>
+        👚 門口有平價布料可以租借包裹<br>
+        💡 建議早上著薄長褲出門，方便入寺廟
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-name">飲食 / 健康</div>
+      <div class="divider"></div>
+      <div class="info-detail">
+        🍜 街頭小食好味，但小朋友腸胃要小心<br>
+        🥤 只飲瓶裝水，唔好飲自來水<br>
+        🌶 叫嘢食時可以要求 <strong>"mai phet"（唔辣）</strong><br>
+        💊 帶備腸胃藥、退燒藥備用<br>
+        🧴 防蚊液必備，尤其Safari World戶外
+      </div>
+    </div>
+    <div class="note-card">
+      <div class="note-title">手信必買清單</div>
+      <div class="note-body">
+        🛒 Big C / Lotus's — 蝦片、芒果乾、泰式即食麵<br>
+        🌿 泰國香皂、椰子油護膚品<br>
+        🐘 象形紀念品 — MBK Center 最平<br>
+        ☕ 泰式奶茶粉、咖啡包<br>
+        💡 比機場平好多，出發前一日先買！
+      </div>
+    </div>
+  </div>
+
+  <!-- WEATHER -->
+  <div id="view-weather" style="display:none">
+    <div class="sec-label">曼谷天氣預報</div>
+    <div class="w-title">8月7–11日 · 曼谷</div>
+    <div class="w-grid">
+      <div class="w-cell"><div class="w-date">8/7 五</div><div class="w-icon">🌧</div><div class="w-loc">深夜到達</div><div class="w-temp">30°C</div><div class="w-rain">☂ 70%</div></div>
+      <div class="w-cell"><div class="w-date">8/8 六</div><div class="w-icon">⛈</div><div class="w-loc">Safari</div><div class="w-temp">33°C</div><div class="w-rain">☂ 65%</div></div>
+      <div class="w-cell"><div class="w-date">8/9 日</div><div class="w-icon">🌦</div><div class="w-loc">Siam Park</div><div class="w-temp">34°C</div><div class="w-rain">☂ 55%</div></div>
+      <div class="w-cell"><div class="w-date">8/10 一</div><div class="w-icon">⛅</div><div class="w-loc">KidZania</div><div class="w-temp">33°C</div><div class="w-rain">☂ 45%</div></div>
+      <div class="w-cell"><div class="w-date">8/11 二</div><div class="w-icon">🌦</div><div class="w-loc">Pororo</div><div class="w-temp">32°C</div><div class="w-rain">☂ 60%</div></div>
+    </div>
+    <div class="note-card">
+      <div class="note-title">☀️ 8月天氣貼士</div>
+      <div class="note-body">
+        🌧 8月係雨季，幾乎每日都有陣雨，通常係下午<br>
+        ⚡ 雷暴時戶外景點可能暫停，Safari World要留意<br>
+        🌡 濕度高，體感溫度比實際更熱，多飲水<br>
+        ☂️ 摺疊雨傘必備，雨停得快唔使怕<br>
+        📱 出發前查 <a href="https://www.accuweather.com" target="_blank" style="color:var(--accent)">AccuWeather</a> 最新預報
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  整理：Claude AI &nbsp;·&nbsp; 曼谷親子之旅 2026<br>
+  <a href="https://www.safariworldbangkok.com" target="_blank">Safari World</a> &nbsp;·&nbsp;
+  <a href="https://www.siamamazingpark.com" target="_blank">Siam Amazing Park</a> &nbsp;·&nbsp;
+  <a href="https://bangkok.kidzania.com" target="_blank">KidZania</a>
+</div>
+
+<script>
+const days=[
+  {tab:"D1\n8/7",title:"深夜到達曼谷",sub:"素萬那普機場 · The Cottage Hotel",items:[
+    {t:"transport",ico:"✈",time:"深夜",name:"抵達素萬那普國際機場",desc:"辦理入境，取行李",tags:[]},
+    {t:"transport",ico:"🚖",time:"深夜",name:"Grab 前往酒店",desc:"The Cottage Suvarnabhumi，約5分鐘車程",tags:[{l:"Grab App",c:"green"}]},
+    {t:"hotel",ico:"🏨",time:"深夜 check in",name:"The Cottage Suvarnabhumi Hotel",desc:"近機場，深夜到達最方便，安心休息",tags:[{l:"1晚",c:"purple"}],map:"https://maps.google.com/?q=The+Cottage+Suvarnabhumi+Hotel+Bangkok"}
+  ]},
+  {tab:"D2\n8/8",title:"Safari World 全日遊",sub:"轉入 Centre Point Sukhumvit 10",items:[
+    {t:"hotel",ico:"🏨",time:"早上 check out",name:"退房 · 行李寄存",desc:"退出 Cottage Hotel，行李放好再出發",tags:[]},
+    {t:"transport",ico:"🚖",time:"08:30",name:"Grab 前往 Safari World",desc:"約45–60分鐘，建議早去避開人潮",tags:[{l:"早去",c:"amber"}]},
+    {t:"place",ico:"🦁",time:"09:00–14:00",name:"Safari Park 駕車遊覽",desc:"獅子、長頸鹿、斑馬、老虎近距離餵食",tags:[{l:"必去",c:"blue"},{l:"親子",c:"green"}],map:"https://maps.google.com/?q=Safari+World+Bangkok",warn:"⚠️ 逢週一休息！請確認當日開放 · 週六人多，建議早到"},
+    {t:"place",ico:"🐬",time:"14:00–17:00",name:"Marine Park 動物表演",desc:"海豚、海獅表演 · 紅毛猩猩拳擊 · 牛仔特技",tags:[{l:"表演",c:"teal"},{l:"親子",c:"green"}]},
+    {t:"transport",ico:"🚖",time:"17:30",name:"Grab 前往新酒店",desc:"Centre Point Sukhumvit 10 check in",tags:[]},
+    {t:"hotel",ico:"🏨",time:"18:30 check in",name:"Centre Point Sukhumvit 10",desc:"Sukhumvit 10 · 近 BTS Asok · 之後3晚基地",tags:[{l:"3晚",c:"purple"}],map:"https://maps.google.com/?q=Centre+Point+Sukhumvit+10+Hotel+Bangkok"},
+    {t:"food",ico:"🍜",time:"晚餐",name:"Terminal 21 食街",desc:"步行可到，各國美食任揀",tags:[{l:"近酒店",c:"amber"}],map:"https://maps.google.com/?q=Terminal+21+Bangkok"}
+  ]},
+  {tab:"D3\n8/9",title:"Siam Amazing Park 水上樂園",sub:"東南亞最大水上主題公園",items:[
+    {t:"transport",ico:"🚖",time:"09:00",name:"Grab 前往 Siam Amazing Park",desc:"約30–45分鐘",tags:[]},
+    {t:"water",ico:"🌊",time:"10:00–17:00",name:"Siam Amazing Park 全日玩",desc:"世界最大波浪池 · 超長滑水道 · 懶人河 · 機動遊戲",tags:[{l:"親子",c:"green"},{l:"水上",c:"teal"},{l:"全日",c:"blue"}],map:"https://maps.google.com/?q=Siam+Amazing+Park+Bangkok",warn:"⚠️ 記得帶泳衣、防曬、毛巾 · 外帶食物不准入場"},
+    {t:"food",ico:"🍽",time:"午餐",name:"園內自助餐廳",desc:"套票通常包自助餐，建議一起買",tags:[{l:"園內",c:"amber"}]},
+    {t:"transport",ico:"🚖",time:"17:30",name:"Grab 返回 Sukhumvit",desc:"約30–45分鐘返酒店",tags:[]},
+    {t:"food",ico:"🌊",time:"晚餐",name:"Asiatique The Riverfront 夜市",desc:"河畔夜市 · 購物 + 美食 + 摩天輪 · 坐免費船去",tags:[{l:"夜市",c:"blue"},{l:"打卡",c:"pink"}],map:"https://maps.google.com/?q=Asiatique+The+Riverfront+Bangkok"}
+  ]},
+  {tab:"D4\n8/10",title:"KidZania + Siam 購物",sub:"Siam Paragon 5樓 KidZania",items:[
+    {t:"transport",ico:"🚇",time:"10:00",name:"BTS 前往 Siam 站",desc:"從 Asok 坐 BTS 約10分鐘",tags:[{l:"BTS",c:"blue"}]},
+    {t:"place",ico:"👨‍🚒",time:"10:30–15:00",name:"KidZania Bangkok",desc:"80+職業體驗 · 消防員、機師、廚師 · 賺KidZos貨幣",tags:[{l:"親子",c:"green"},{l:"室內",c:"teal"}],map:"https://maps.google.com/?q=KidZania+Siam+Paragon+Bangkok",warn:"⚠️ 平日10:00–17:00 · 週末10:30–20:30 · 建議提前網上訂票"},
+    {t:"shop",ico:"🛍",time:"15:00–18:00",name:"Siam Paragon / Siam Square 購物",desc:"名牌、泰國手信、美食廣場",tags:[{l:"購物",c:"blue"}],map:"https://maps.google.com/?q=Siam+Paragon+Bangkok"},
+    {t:"place",ico:"🐟",time:"可選加",name:"SEA LIFE Bangkok Ocean World",desc:"Siam Paragon B1–B2 · 東南亞最大水族館 · 約2小時",tags:[{l:"加選",c:"purple"}],map:"https://maps.google.com/?q=SEA+LIFE+Bangkok+Ocean+World"},
+    {t:"food",ico:"🍱",time:"晚餐",name:"ICONSIAM SookSiam",desc:"室內水上市場 · 77省地道美食 · 免費BTS Gold Line可到",tags:[{l:"必試",c:"amber"}],map:"https://maps.google.com/?q=ICONSIAM+Bangkok"}
+  ]},
+  {tab:"D5\n8/11",title:"Pororo Aquapark → 回程",sub:"Central Plaza Bangna 6樓",items:[
+    {t:"water",ico:"🐧",time:"10:30–15:00",name:"Pororo Aquapark Bangkok",desc:"韓國卡通主題屋頂水上樂園 · 600m滑水道 · 9個水池",tags:[{l:"親子",c:"green"},{l:"卡通",c:"teal"},{l:"90cm以下免費",c:"amber"}],map:"https://maps.google.com/?q=Pororo+Aquapark+Central+Bangna+Bangkok",warn:"⚠️ 120cm以下不能玩大滑道"},
+    {t:"food",ico:"🍜",time:"午餐",name:"Central Bangna 商場美食",desc:"Pororo 所在商場內用餐",tags:[{l:"方便",c:"amber"}]},
+    {t:"shop",ico:"🎁",time:"15:30–17:00",name:"最後手信 · Big C / Lotus's",desc:"蝦片、芒果乾、泰式即食麵 · 比機場平好多",tags:[{l:"手信",c:"blue"},{l:"必買",c:"green"}],map:"https://maps.google.com/?q=Big+C+Bangkok"},
+    {t:"transport",ico:"🚖",time:"17:30",name:"Grab 前往素萬那普機場",desc:"約30–45分鐘，視乎交通，預留充裕時間",tags:[{l:"重要",c:"red"}]},
+    {t:"transport",ico:"✈",time:"晚上",name:"回程航班",desc:"旅程結束！平安回家",tags:[{l:"平安回家",c:"green"}]}
+  ]}
+];
+
+const spots=[
+  {id:0,cat:"temple",ico:"⛩",name:"鄭王廟 Wat Arun",sub:"昭披耶河畔地標 · 日落最靚 · 可爬主塔",tags:[{l:"必去",c:"green"},{l:"戶外",c:"blue"},{l:"08:00–18:00",c:"amber"}],tip:"建議早上或黃昏去，避免正午酷熱",map:"https://maps.google.com/?q=Wat+Arun+Bangkok"},
+  {id:1,cat:"temple",ico:"👑",name:"大皇宮 Grand Palace",sub:"泰國最重要王宮 · 玉佛寺 · Wat Pho順路",tags:[{l:"必去",c:"green"},{l:"戶外",c:"blue"},{l:"著長褲",c:"red"}],tip:"必須著蓋膝蓋衣物入場，建議早上9點前到",map:"https://maps.google.com/?q=Grand+Palace+Bangkok"},
+  {id:2,cat:"photo",ico:"👘",name:"影泰服 Bestie Costume",sub:"鄭王廟對面 · 男女泰服租借 · 可加攝影師",tags:[{l:"打卡",c:"blue"},{l:"親子",c:"green"},{l:"需預約",c:"amber"}],tip:"一家人著泰服影相，週末需提前預約"},
+  {id:3,cat:"photo",ico:"📸",name:"影泰服 Sense of Thai",sub:"Tha Maharaj Mall 2樓 · 近大皇宮 · 10:00–18:30",tags:[{l:"打卡",c:"blue"},{l:"室內",c:"green"}],tip:"連大皇宮/鄭王廟可以一齊去"},
+  {id:4,cat:"shop",ico:"🏬",name:"Terminal 21",sub:"每層係唔同城市主題 · 近酒店 · BTS Asok",tags:[{l:"購物",c:"blue"},{l:"近酒店",c:"green"}],tip:"步行至酒店約5分鐘，超方便",map:"https://maps.google.com/?q=Terminal+21+Bangkok"},
+  {id:5,cat:"shop",ico:"🛍",name:"ICONSIAM",sub:"室內水上市場 SookSiam · 77省地道美食",tags:[{l:"購物",c:"blue"},{l:"美食",c:"amber"},{l:"必去",c:"green"}],tip:"免費BTS Gold Line可到，SookSiam食盡全泰國",map:"https://maps.google.com/?q=ICONSIAM+Bangkok"},
+  {id:6,cat:"shop",ico:"🏪",name:"MBK Center",sub:"平價購物 · 紀念品 · 電子產品 · 議價文化",tags:[{l:"平價",c:"amber"},{l:"手信",c:"blue"}],tip:"格仔舖記得砍價",map:"https://maps.google.com/?q=MBK+Center+Bangkok"},
+  {id:7,cat:"shop",ico:"🏢",name:"CentralWorld",sub:"超過600間店 · Uniqlo、Zara · 近BTS Chidlom",tags:[{l:"購物",c:"blue"},{l:"品牌",c:"amber"}],tip:"旁邊有Gaysorn Village高檔購物",map:"https://maps.google.com/?q=CentralWorld+Bangkok"},
+  {id:8,cat:"shop",ico:"🌿",name:"Chatuchak Weekend Market",sub:"世界最大露天市集 · 週六日限定 · 萬種商品",tags:[{l:"週末限定",c:"red"},{l:"平價",c:"amber"}],tip:"去早啲！中午開始非常熱，帶水帶現金",map:"https://maps.google.com/?q=Chatuchak+Weekend+Market+Bangkok"},
+  {id:9,cat:"shop",ico:"🛒",name:"Big C Supermarket",sub:"泰國大型超市 · 零食手信 · 生活用品",tags:[{l:"手信",c:"blue"},{l:"超市",c:"green"},{l:"全城都有",c:"amber"}],tip:"蝦片、芒果乾、泰式即食麵必買，比機場平好多",map:"https://maps.google.com/?q=Big+C+Bangkok"},
+  {id:10,cat:"shop",ico:"🪷",name:"Lotus's",sub:"另一大型超市 · 部分有熟食區 · 夜市附近多",tags:[{l:"手信",c:"blue"},{l:"超市",c:"green"}],tip:"同Big C差不多，睇邊間近就去邊間",map:"https://maps.google.com/?q=Lotus+Bangkok"},
+  {id:11,cat:"cafe",ico:"☕",name:"ICI Dessert House",sub:"Sukhumvit 27 · 近酒店 · 招牌The Starfish甜品",tags:[{l:"甜品",c:"blue"},{l:"近酒店",c:"green"},{l:"打卡",c:"amber"}],tip:"步行至酒店約10分鐘",map:"https://maps.google.com/?q=ICI+Dessert+House+Bangkok"},
+  {id:12,cat:"cafe",ico:"🫖",name:"Morgen Coffee",sub:"EmQuartier附近 · 北歐風 · 巴西Arabica豆",tags:[{l:"咖啡",c:"blue"},{l:"打卡",c:"amber"}],tip:"購物完順路去，環境清靜",map:"https://maps.google.com/?q=Morgen+Coffee+Bangkok"},
+  {id:13,cat:"cafe",ico:"🎌",name:"Kurasu Thonglor",sub:"Sukhumvit 57 · 日式風格 · 本地咖啡豆",tags:[{l:"咖啡",c:"blue"},{l:"日式",c:"amber"}],tip:"有咖啡風味圖表幫你揀，適合咖啡控",map:"https://maps.google.com/?q=Kurasu+Thonglor+Bangkok"},
+  {id:14,cat:"food",ico:"🌊",name:"Asiatique The Riverfront",sub:"河畔夜市 · 購物+美食+摩天輪 · 17:00開",tags:[{l:"夜市",c:"blue"},{l:"打卡",c:"pink"},{l:"夜晚",c:"green"}],tip:"坐免費船去，日落後景色超靚",map:"https://maps.google.com/?q=Asiatique+The+Riverfront+Bangkok"},
+  {id:15,cat:"food",ico:"🍢",name:"Or Tor Kor Market",sub:"高質新鮮市場 · Chatuchak旁 · 熱帶水果必試",tags:[{l:"市場",c:"green"},{l:"水果",c:"amber"}],tip:"曼谷最乾淨嘅市場，榴槤、山竹、紅毛丹新鮮",map:"https://maps.google.com/?q=Or+Tor+Kor+Market+Bangkok"}
+];
+
+const cats=[
+  {id:"all",label:"全部"},
+  {id:"temple",label:"寺廟文化"},
+  {id:"photo",label:"影泰服"},
+  {id:"shop",label:"購物"},
+  {id:"cafe",label:"Cafe"},
+  {id:"food",label:"夜市美食"}
+];
+
+const icoClass={place:'ico-place',food:'ico-food',transport:'ico-transport',shop:'ico-shop',hotel:'ico-hotel',water:'ico-water'};
+const tagClass={blue:'t-blue',amber:'t-amber',green:'t-green',red:'t-red',purple:'t-purple',teal:'t-teal',pink:'t-pink'};
+let done={};let cur=0;
+let picked=new Set();let curCat="all";
+
+function renderDayTabs(){
+  document.getElementById('dayTabs').innerHTML=days.map((d,i)=>
+    `<button class="day-btn ${i===cur?'active':''}" onclick="switchDay(${i})">${d.tab.replace('\n','<br>')}</button>`
+  ).join('');
+}
+
+function renderDay(di){
+  const d=days[di];const dk='d'+di;
+  if(!done[dk])done[dk]={};
+  const total=d.items.length;
+  const doneN=Object.values(done[dk]).filter(Boolean).length;
+  const pct=total?Math.round(doneN/total*100):0;
+  let html=`<div class="card"><div class="card-header">
+    <div class="card-title">${d.title}</div>
+    <div class="card-sub">${d.sub}</div>
+    <div class="prog-row"><div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>
+    <div class="prog-text">${doneN}/${total}</div></div></div>`;
+  d.items.forEach((item,i)=>{
+    const isDone=!!done[dk][i];
+    const tags=item.tags.map(t=>`<span class="tag ${tagClass[t.c]}">${t.l}</span>`).join('');
+    const mapBtn=item.map?`<a class="map-link" href="${item.map}" target="_blank">📍 地圖</a>`:'';
+    const rowContent=(tags||mapBtn)?`<div class="irow">${tags}${mapBtn}</div>`:'';
+    const warn=item.warn?`<div class="warn">${item.warn}</div>`:'';
+    html+=`<div class="item ${isDone?'done':''}">
+      <div class="ico ${icoClass[item.t]}">${item.ico}</div>
+      <div class="ibody">
+        <div class="itime">${item.time}</div>
+        <div class="iname">${item.name}</div>
+        <div class="idesc">${item.desc}</div>
+        ${rowContent}${warn}
+      </div>
+      <button class="chk ${isDone?'done':''}" onclick="toggleDay(${di},${i})">✓</button>
+    </div>`;
+  });
+  html+='</div>';
+  document.getElementById('dayContent').innerHTML=html;
+}
+
+function toggleDay(di,ii){
+  const dk='d'+di;done[dk][ii]=!done[dk][ii];renderDay(di);
+}
+
+function switchDay(i){cur=i;renderDayTabs();renderDay(i);}
+
+function renderSpotFilters(){
+  document.getElementById('spotFilters').innerHTML=cats.map(c=>
+    `<button class="f-btn ${curCat===c.id?'on':''}" onclick="setSpotFilter('${c.id}')">${c.label}</button>`
+  ).join('');
+}
+
+function renderSpots(){
+  const visible=curCat==="all"?spots:spots.filter(s=>s.cat===curCat);
+  document.getElementById('spotsGrid').innerHTML=visible.map(s=>{
+    const isPicked=picked.has(s.id);
+    const tags=s.tags.map(t=>`<span class="tag t-${t.c}">${t.l}</span>`).join('');
+    const mapBtn=s.map?`<a class="map-link" href="${s.map}" target="_blank" onclick="event.stopPropagation()">📍 地圖</a>`:'';
+    return `<div class="spot-card ${isPicked?'picked':''}" onclick="toggleSpot(${s.id})">
+      <div class="s-top">
+        <div class="s-ico">${s.ico}</div>
+        <div style="flex:1">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px">
+            <div class="s-title">${s.name}</div>
+            ${isPicked?'<span class="pick-mark">✓</span>':''}
+          </div>
+          <div class="s-sub">${s.sub}</div>
+        </div>
+      </div>
+      ${isPicked?`<div class="s-tip">💡 ${s.tip}</div>`:''}
+      <div class="irow">${tags}${mapBtn}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('picked-count').textContent=picked.size;
+}
+
+function toggleSpot(id){
+  if(picked.has(id))picked.delete(id);else picked.add(id);
+  renderSpots();
+}
+
+function setSpotFilter(cat){
+  curCat=cat;renderSpotFilters();renderSpots();
+}
+
+function switchNav(view,btn){
+  ['itinerary','spots','hotels','tips','weather'].forEach(v=>{
+    document.getElementById('view-'+v).style.display=v===view?'block':'none';
+  });
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(view==='spots'){renderSpotFilters();renderSpots();}
+}
+
+renderDayTabs();
+renderDay(0);
+</script>
+</body>
+</html>
